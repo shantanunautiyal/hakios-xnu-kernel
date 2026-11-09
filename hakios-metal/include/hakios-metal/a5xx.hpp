@@ -13,7 +13,9 @@
 
 #include <cstdint>
 
-namespace hakios_metal {
+namespace hakios::metal::a5xx {
+
+inline constexpr uint32_t kChipId = 0x5000600;  // not-in-headers: qcom,chipid of the msm8953's Adreno 506
 
 /* ---- command processor packets (adreno_pm4.xml.h, enum adreno_pm4_type3_packets) ---- */
 
@@ -41,4 +43,4 @@ constexpr uint32_t REG_A5XX_CP_INTERRUPT_STATUS = 0x0b18; // REG_A5XX_CP_INTERRU
 constexpr uint32_t REG_A5XX_CP_HW_FAULT = 0x0b1a;         // REG_A5XX_CP_HW_FAULT          a5xx.xml.h:1051
 constexpr uint32_t REG_A5XX_CP_PROTECT_STATUS = 0x0b1c;   // REG_A5XX_CP_PROTECT_STATUS     a5xx.xml.h:1054
 
-}  // namespace hakios_metal
+}  // namespace hakios::metal::a5xx
