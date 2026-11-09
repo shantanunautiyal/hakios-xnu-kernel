@@ -26,6 +26,8 @@
 static uint32_t touch_lat = 2;          /* 2: not yet looked up */
 
 extern void loader_log_line(const char *line);
+extern void hakios_emmc_init(void);      /* drivers/storage/hakios.emmc.c (or its stub) */
+extern void hakios_emmc_quiesce(void);
 
 /*
  * A "tl:" line, for the kernel's drivers: into the loader's log as it is written -- the kernel's own
@@ -287,6 +289,7 @@ hakios_input_init(void)
 	hakios_buttons_init();
 	hakios_battery_init();
 	hakios_ufs_init();
+	hakios_emmc_init();
 	hakios_net_init();
 	hakios_adreno_init();
 	hakios_wifi_init();

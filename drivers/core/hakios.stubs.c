@@ -53,6 +53,11 @@ void hakios_ufs_quiesce(void) {}
 void hakios_var_save_on_return(void) {}         /* no flash, so no data volume to save into it */
 #endif
 
+#ifndef HAKIOS_EMMC
+void hakios_emmc_init(void) {}
+void hakios_emmc_quiesce(void) {}
+#endif
+
 #ifndef HAKIOS_VIRTIO_BLK
 void hakios_virtio_blk_init(void) {}
 bool hakios_virtio_blk_dev(__unused dev_t dev) { return false; }

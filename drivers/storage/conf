@@ -18,6 +18,11 @@ driver UFS
 	help    driven from the kernel (ufs_native=). THE ONLY CODE OF THE KERNEL THAT MAY WRITE TO THE PHONE
 	help    (ufs_write=1, the partition `darwin` only): see tools/provenance.allow
 
+driver EMMC
+	file    bsd/dev/hakios.emmc.c
+	help    the msm8953's eMMC on sdhci@7824900: a block/character device per GPT partition (emmc=1),
+	help    read only (no MMC write path), for the sakura (Redmi 6 Pro) storage
+
 driver VIRTIO_BLK
 	file    bsd/dev/hakios.virtio_blk.c
 	help    a disk image of the host as /dev/rvblk0 (virtio_blk=1). QEMU only
