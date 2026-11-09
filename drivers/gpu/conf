@@ -4,6 +4,8 @@
 
 driver ADRENO
 	file    bsd/dev/hakios.adreno.c
+	file    bsd/dev/hakios.adreno.a5xx.c
 	file    iokit/Kernel/hakios.gpu.cpp iokitcpp
-	help    the Adreno 642L of the SC7280 woken step by step (adreno=N), and HakiosGPU, the IOKit service Mesa, Metal and
-	help    the window server draw through (gpu=1, adreno_keep=1; docs/reference/metal.md). Needs the GPU's firmware from the phone (fw-gpu/)
+	help    the Adreno 642L of the SC7280 woken step by step (adreno=N), the sakura Adreno 506 (A5XX) counterpart in
+	help    hakios.adreno.a5xx.c (MSM8953), and HakiosGPU, the IOKit service Mesa, Metal and the window server draw through
+	help    (gpu=1, adreno_keep=1; docs/reference/metal.md). Needs the GPU's firmware from the phone (fw-gpu/)

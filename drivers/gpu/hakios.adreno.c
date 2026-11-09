@@ -92,19 +92,30 @@
  * vendor kernel agrees on every offset used here, and is the only source for the frequency counter.
  */
 #include <kern/clock.h>
+#include <kern/clock.h>
+#include <kern/kalloc.h>
 #include <libkern/libkern.h>
 #include <mach/mach_types.h>
 #include <mach/vm_param.h>
+#include <os/atomic_private.h>
 #include <pexpert/pexpert.h>
 #include <sys/hakios.input.h>
 #include <sys/stat.h>
 #include <sys/systm.h>
+#include <vm/memory_types.h>
 #include <vm/vm_kern.h>
+
+/* Pull the machine config explicitly (as osfmk/arm64/proc_reg.h does): on the
+ * MSM8953 build it selects pexpert/arm64/MSM8953.h, which defines
+ * GENERIC_GIC_V2_IRQ; on SC7280 it selects the v3 board. Relying on the
+ * transitive chain differs per TU. */
+#include <pexpert/arm64/board_config.h>
 
 extern vm_offset_t ml_io_map(vm_offset_t phys_addr, vm_size_t size);
 extern vm_offset_t ml_io_map_wcomb(vm_offset_t phys_addr, vm_size_t size);
 extern uint64_t kvtophys(vm_offset_t va);       /* pmap_paddr_t */
 
+#if !defined(GENERIC_GIC_V2_IRQ) /* the Adreno 642L path (redwood/SC7280); sakura's Adreno 506 (A5XX) is hakios.adreno.a5xx.c */
 static uint32_t last_step, skip_steps, pause_ms = 2200, fine, watch_seconds = 20;
 static uint32_t step;                   /* the one being performed */
 static uint32_t speed_bin;              /* which of the GPUs of this kind the fuses say this is (step 2) */
@@ -3850,3 +3861,4 @@ hakios_adreno_init(void)
 	}
 	printf("adreno: over; the system goes on starting\n");
 }
+#endif /* !defined(GENERIC_GIC_V2_IRQ) */
